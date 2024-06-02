@@ -93,14 +93,15 @@ INSERT INTO Status (StatusName) VALUES ('Open'), ('In Progress'), ('Resolved'), 
 INSERT INTO Severity (SeverityName) VALUES ('Critical'), ('High'), ('Medium'), ('Low');
 
 
--- Execute the prepared statement with sample data
-EXECUTE insert_user('John', 'Doe', 'john.doe@example.com', 'hashed_password_here', 1, TRUE);
-EXECUTE insert_user('Jane', 'Smith', 'jane.smith@example.com', 'hashed_password_here', 3, TRUE);
+-- Prepare statement to insert users
+PREPARE insert_user (VARCHAR(60), VARCHAR(60), VARCHAR(60), VARCHAR(255), INT, BOOLEAN) AS
+    INSERT INTO Users (FirstName, LastName, Email, Password, RoleId, IsActive)
+    VALUES ($1, $2, $3, $4, $5, $6);
 
--- Prepare and execute other operations as needed
--- For example, updating a bug status might be a common operation
-PREPARE update_bug_status (INT, INT) AS
-    UPDATE Bugs SET StatusId = $1 WHERE BugId = $2;
+-- Execute the prepared statement with sample data
+EXECUTE insert_user('John', 'Doe', 'john.doe@example.com', '$2a$12$4PZqTjtYwjdOjoMRHsCmXuZBx/wxP9MbPypLt6Mz0votMG.Y2EZJe', 1, TRUE);
+EXECUTE insert_user('Jane', 'Smith', 'jane.smith@example.com', '$2a$12$EixZaYVK1fsbw1Zfbx3OpZOrJui8U4b8Fz.mwVqfsbC4z3q2h1iOm', 3, TRUE);
+
 
     
 \c postgres
