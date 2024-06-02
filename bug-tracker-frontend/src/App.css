@@ -1,0 +1,22 @@
+/* Set the background color to black and text color to white for contrast */
+body, html {
+  background-color: #000;
+  color: #fff;
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ensure all text and labels are white by default */
+.MuiTypography-root, .MuiInputLabel-root, .MuiInputBase-input {
+  color: #fff !important;
+}

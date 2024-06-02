@@ -1,0 +1,109 @@
+\qecho YMK
+\qecho Bug Tracker Database
+\qecho
+
+\c postgres
+
+CREATE DATABASE trialbugtrackerdb;
+\c trialbugtrackerdb
+
+CREATE TABLE Roles (
+    RoleId SERIAL PRIMARY KEY,
+    Name VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE Users (
+    UserId SERIAL PRIMARY KEY,
+    FirstName VARCHAR(60) NOT NULL,
+    LastName VARCHAR(60) NOT NULL,
+    Email VARCHAR(60) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL, 
+    RoleId INT,
+    IsActive BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (RoleId) REFERENCES Roles(RoleId)
+);
+
+CREATE INDEX idx_user_email ON Users(Email); 
+
+CREATE TABLE Projects (
+    ProjectId SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    StartDate DATE,
+    EndDate DATE,
+    ProjectManagerId INT,
+    FOREIGN KEY (ProjectManagerId) REFERENCES Users(UserId)
+);
+
+CREATE TABLE Users_Projects (
+    UserProjectId SERIAL PRIMARY KEY,
+    UserId INT,
+    ProjectId INT,
+    FOREIGN KEY (UserId) REFERENCES Users(UserId),
+    FOREIGN KEY (ProjectId) REFERENCES Projects(ProjectId)
+);
+
+CREATE TABLE Status (
+    StatusId SERIAL PRIMARY KEY,
+    StatusName VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE Severity (
+    SeverityId SERIAL PRIMARY KEY,
+    SeverityName VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE Bugs (
+    BugId SERIAL PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    Description TEXT,
+    ProjectId INT,
+    StatusId INT,
+    SeverityId INT,
+    AssignedTo INT,
+    ReportedBy INT,
+    FOREIGN KEY (ProjectId) REFERENCES Projects(ProjectId),
+    FOREIGN KEY (StatusId) REFERENCES Status(StatusId),
+    FOREIGN KEY (SeverityId) REFERENCES Severity(SeverityId),
+    FOREIGN KEY (AssignedTo) REFERENCES Users(UserId),
+    FOREIGN KEY (ReportedBy) REFERENCES Users(UserId)
+);
+
+-- Altering the Bugs table to drop NOT NULL constraint on AssignedTo and ReportedBy
+ALTER TABLE Bugs ALTER COLUMN AssignedTo DROP NOT NULL;
+ALTER TABLE Bugs ALTER COLUMN ReportedBy DROP NOT NULL;
+
+CREATE TABLE Audit_logs (
+    LogId SERIAL PRIMARY KEY,
+    BugId INT,
+    ChangedBy INT,
+    ChangeType VARCHAR(100),
+    ChangeDescription TEXT,
+    ChangeDate TIMESTAMP WITH TIME ZONE,
+    FOREIGN KEY (BugId) REFERENCES Bugs(BugId),
+    FOREIGN KEY (ChangedBy) REFERENCES Users(UserId)
+);
+
+-- Inserting initial data into Roles
+INSERT INTO Roles (Name) VALUES ('Admin'), ('Project Manager'), ('Developer'), ('Tester');
+
+-- Inserting initial data into Status
+INSERT INTO Status (StatusName) VALUES ('Open'), ('In Progress'), ('Resolved'), ('Closed');
+
+-- Inserting initial data into Severity
+INSERT INTO Severity (SeverityName) VALUES ('Critical'), ('High'), ('Medium'), ('Low');
+
+
+-- Execute the prepared statement with sample data
+EXECUTE insert_user('John', 'Doe', 'john.doe@example.com', 'hashed_password_here', 1, TRUE);
+EXECUTE insert_user('Jane', 'Smith', 'jane.smith@example.com', 'hashed_password_here', 3, TRUE);
+
+-- Prepare and execute other operations as needed
+-- For example, updating a bug status might be a common operation
+PREPARE update_bug_status (INT, INT) AS
+    UPDATE Bugs SET StatusId = $1 WHERE BugId = $2;
+
+    
+\c postgres
+SELECT current_database();
+
+--DROP DATABASE trialbugtrackerdb;
