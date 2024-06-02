@@ -12,12 +12,13 @@ const authenticateToken = require("../middleware/auth");
 const roleCheck = require("../middleware/roleCheck");
 
 // Public routes
-router.post("/register", registerUser);
+// router.post("/", registerUser);
 router.post("/login", loginUser);
 
 // Protected routes
-router.get("/", authenticateToken, roleCheck([1,2]), getUsers); // Only Admin
-router.get("/:id", authenticateToken, roleCheck([1,2]), getUserById); // Only Admin
+router.post("/", authenticateToken, roleCheck([1]), registerUser); //Only Admin
+router.get("/", authenticateToken, roleCheck([1,2]), getUsers); // Only Admin and PM
+router.get("/:id", authenticateToken, roleCheck([1,2]), getUserById); // Only Admin and PM
 router.put("/:id", authenticateToken, roleCheck([1]), updateUser); // Only Admin
 router.delete("/:id", authenticateToken, roleCheck([1]), deleteUser); // Only Admin
 
