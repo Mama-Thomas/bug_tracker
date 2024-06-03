@@ -18,6 +18,26 @@ const getBugs = async () => {
 };
 
 
+// const getBugById = async (id) => {
+//   return pool.query(
+//     `SELECT 
+//       b.bugid, 
+//       b.title, 
+//       b.description, 
+//       b.projectid, 
+//       s.statusname as status, 
+//       v.severityname as severity, 
+//       b.assignedto, 
+//       b.reportedby 
+//      FROM Bugs b
+//      LEFT JOIN Status s ON b.statusid = s.statusid
+//      LEFT JOIN Severity v ON b.severityid = v.severityid
+//      WHERE b.bugid = $1`,
+//     [id]
+//   );
+// };
+
+
 const getBugById = async (id) => {
   return pool.query(
     `SELECT 
@@ -27,15 +47,24 @@ const getBugById = async (id) => {
       b.projectid, 
       s.statusname as status, 
       v.severityname as severity, 
+      b.statusid,
+      b.severityid,
       b.assignedto, 
-      b.reportedby 
+      at.firstname || ' ' || at.lastname as assignedtoname,
+      b.reportedby,
+      rb.firstname || ' ' || rb.lastname as reportedbyname,
+      p.name as projectname
      FROM Bugs b
      LEFT JOIN Status s ON b.statusid = s.statusid
      LEFT JOIN Severity v ON b.severityid = v.severityid
+     LEFT JOIN Users at ON b.assignedto = at.userid
+     LEFT JOIN Users rb ON b.reportedby = rb.userid
+     LEFT JOIN Projects p ON b.projectid = p.projectid
      WHERE b.bugid = $1`,
     [id]
   );
 };
+
 
 const createBug = async (bug) => {
   const {
