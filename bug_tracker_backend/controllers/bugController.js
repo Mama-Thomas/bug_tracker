@@ -1,6 +1,7 @@
 const {
   getBugs,
   getBugById,
+  getBugsByProjectId,
   createBug,
   updateBug,
   deleteBug,
@@ -87,6 +88,16 @@ exports.deleteBug = async (req, res) => {
   try {
     await deleteBug(id);
     res.status(204).send();
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getBugsByProjectId = async (req, res) => {
+  const { projectId } = req.params;
+  try {
+    const result = await getBugsByProjectId(projectId);
+    res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
