@@ -6,6 +6,9 @@ const {
   updateBug,
   deleteBug,
   assignBug,
+  getUserBugs,
+  getBugsReportedByUser,
+  getBugsAssignedToUser,
 } = require("../models/bugModel");
 
 exports.getBugs = async (req, res) => {
@@ -103,12 +106,43 @@ exports.getBugsByProjectId = async (req, res) => {
   }
 };
 
+exports.getBugsReportedByUser = async (req, res) => {
+  const { userid } = req.params;
+  try {
+    const result = await getBugsReportedByUser(userid);
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getBugsAssignedToUser = async (req, res) => {
+  const { userid } = req.params;
+  try {
+    const result = await getBugsAssignedToUser(userid);
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.assignBug = async (req, res) => {
   const { id } = req.params;
   const { assignedto } = req.body;
   try {
     const result = await assignBug(id, assignedto);
     res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+exports.getUserBugs = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const result = await getUserBugs(userId);
+    res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

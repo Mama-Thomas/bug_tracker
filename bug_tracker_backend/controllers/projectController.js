@@ -170,6 +170,7 @@ const {
   updateProject,
   deleteProject,
   getUsersByProjectId,
+  getUserProjects
 } = require("../models/projectModel");
 
 exports.getProjects = async (req, res) => {
@@ -265,3 +266,25 @@ exports.deleteProject = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.getUserProjects = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const result = await getUserProjects(userId);
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getUserProjects = async (req, res) => {
+  const { userid } = req.params;
+  try {
+    const result = await getUserProjects(userid);
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+

@@ -28,6 +28,7 @@ const {
   createProject,
   updateProject,
   deleteProject,
+  getUserProjects,
 } = require("../controllers/projectController");
 const {
   getBugsByProjectId,
@@ -41,5 +42,6 @@ router.post("/", authenticateToken, roleCheck([1, 2]), createProject); // Admin 
 router.put("/:id", authenticateToken, roleCheck([1, 2]), updateProject); // Admin and Project Manager
 router.delete("/:id", authenticateToken, roleCheck([1, 2]), deleteProject); // Admin and Project Manager
 router.get("/:projectId/bugs", authenticateToken,  getBugsByProjectId); // Get bugs by project ID
+router.get("/user/:userid", authenticateToken, getUserProjects); // New route for fetching user projects
 
 module.exports = router;

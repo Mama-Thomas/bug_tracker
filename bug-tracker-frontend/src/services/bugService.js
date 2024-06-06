@@ -108,6 +108,16 @@ const getBugsByProjectId = (projectId) => {
   });
 };
 
+
+const getUserBugs = (userId) => {
+  return axios.get(`${API_URL}user/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
+
 export default {
   getBugs,
   getBug,
@@ -115,4 +125,5 @@ export default {
   updateBug,
   deleteBug,
   getBugsByProjectId,
+  getUserBugs
 };

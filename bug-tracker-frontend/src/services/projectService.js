@@ -43,10 +43,20 @@ const deleteProject = (id) => {
   });
 };
 
+const getUserProjects = (userId) => {
+  return axios.get(`${API_URL}user/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
+
 export default {
   getProjects,
   getProject,
   createProject,
   updateProject,
   deleteProject,
+   getUserProjects
 };

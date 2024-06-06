@@ -242,6 +242,55 @@ const deleteBug = async (id) => {
   return pool.query("DELETE FROM Bugs WHERE BugId=$1", [id]);
 };
 
+// const getUserBugs = async (userId) => {
+//   return pool.query(
+//     `SELECT b.bugid, b.title, p.name as projectname
+//      FROM Bugs b
+//      JOIN Projects p ON b.projectid = p.projectid
+//      WHERE b.assignedto = $1 OR b.reportedby = $1`,
+//     [userId]
+//   );
+// };
+
+const getBugsReportedByUser = async (userId) => {
+  return pool.query(
+    `SELECT b.bugid, b.title, b.description, b.statusid, b.severityid, 
+            b.projectid, b.assignedto, b.reportedby,
+            s.statusname as status, sv.severityname as severity,
+            u1.firstname || ' ' || u1.lastname as assignedtoname,
+            u2.firstname || ' ' || u2.lastname as reportedbyname,
+            p.name as projectname
+     FROM bugs b
+     LEFT JOIN status s ON b.statusid = s.statusid
+     LEFT JOIN severity sv ON b.severityid = sv.severityid
+     LEFT JOIN users u1 ON b.assignedto = u1.userid
+     LEFT JOIN users u2 ON b.reportedby = u2.userid
+     LEFT JOIN projects p ON b.projectid = p.projectid
+     WHERE b.reportedby = $1`,
+    [userId]
+  );
+};
+
+const getBugsAssignedToUser = async (userId) => {
+  return pool.query(
+    `SELECT b.bugid, b.title, b.description, b.statusid, b.severityid, 
+            b.projectid, b.assignedto, b.reportedby,
+            s.statusname as status, sv.severityname as severity,
+            u1.firstname || ' ' || u1.lastname as assignedtoname,
+            u2.firstname || ' ' || u2.lastname as reportedbyname,
+            p.name as projectname
+     FROM bugs b
+     LEFT JOIN status s ON b.statusid = s.statusid
+     LEFT JOIN severity sv ON b.severityid = sv.severityid
+     LEFT JOIN users u1 ON b.assignedto = u1.userid
+     LEFT JOIN users u2 ON b.reportedby = u2.userid
+     LEFT JOIN projects p ON b.projectid = p.projectid
+     WHERE b.assignedto = $1`,
+    [userId]
+  );
+};
+
+
 module.exports = {
   getBugs,
   getBugsByProjectId,
@@ -249,5 +298,7 @@ module.exports = {
   createBug,
   updateBug,
   deleteBug,
+  getBugsReportedByUser,
+  getBugsAssignedToUser
 };
 

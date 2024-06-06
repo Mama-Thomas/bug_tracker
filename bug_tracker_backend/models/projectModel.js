@@ -13,6 +13,8 @@ const getProjects = async () => {
   );
 };
 
+
+
 const getProjectById = async (id) => {
   return pool.query(
     `SELECT 
@@ -115,6 +117,27 @@ const getUsersByProjectId = async (projectid) => {
   );
 };
 
+// const getUserProjects = async (userId) => {
+//   return pool.query(
+//     `SELECT p.projectid, p.name
+//      FROM Projects p
+//      JOIN users_projects pu ON p.projectid = pu.userprojectid
+//      WHERE pu.userid = $1`,
+//     [userId]
+//   );
+// };
+
+const getUserProjects = async (userId) => {
+  return pool.query(
+    `SELECT p.projectid, p.name, p.startdate, p.enddate, u.firstname || ' ' || u.lastname as projectmanager
+     FROM projects p
+     JOIN users_projects up ON p.projectid = up.projectid
+     LEFT JOIN users u ON p.projectmanagerid = u.userid
+     WHERE up.userid = $1`,
+    [userId]
+  );
+};
+
 module.exports = {
   getProjects,
   getProjectById,
@@ -122,4 +145,5 @@ module.exports = {
   updateProject,
   deleteProject,
   getUsersByProjectId,
+  getUserProjects
 };
