@@ -24,7 +24,7 @@ We are planning to make our bug tracking system better by using a simple and foc
 ## Schema Design:
 Link to Lucidcahrt https://lucid.app/lucidchart/3ea45360-d346-443d-9889-941329946833/edit?viewport_loc=-1 43%2C568%2C2466%2C1216%2C0_0&invitationId=inv_ec04d029-32f8-4e44-9b03-b14e5 e17ca9e
 
-![Schema](/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/schema_image.png)
+![Schema](https://github.com/Mama-Thomas/Bug_Tracker_2/images/schema_image.png)
 
 ## API Endpoints and Functions
 
@@ -114,58 +114,58 @@ Link to Lucidcahrt https://lucid.app/lucidchart/3ea45360-d346-443d-9889-94132994
 
 ### Database Software (DBMS)
 
-- **PostgreSQL: We selected PostgreSQL for its robustness and ability to handle complex queries, which is ideal for our bug tracking system.
+- PostgreSQL: We selected PostgreSQL for its robustness and ability to handle complex queries, which is ideal for our bug tracking system.
   
 ### UI Tools:
-- **React.js and MUI: We are using React.js for building a dynamic user interface and MUI for implementing our UI components.
+- React.js and MUI: We are using React.js for building a dynamic user interface and MUI for implementing our UI components.
 ### Database Hosting:
-- **Stored locally.
+- Stored locally.
   
 ### Additional Tools
-- **Node.js: Used for backend development to handle our application's data processing efficiently.
-- **Express.js: Lightweight backend framework used as an application server.
-- **JWT (jsonwebtoken): Used for handling authentication and securing API endpoints.
-- **Axios: Used for making HTTP requests from the frontend to the backend.
-- **Visual Studio Code (VS Code): Chosen for our IDE due to its robust support for JavaScript and React.js.
+- Node.js: Used for backend development to handle our application's data processing efficiently.
+- Express.js: Lightweight backend framework used as an application server.
+- JWT (jsonwebtoken): Used for handling authentication and securing API endpoints.
+- Axios: Used for making HTTP requests from the frontend to the backend.
+- Visual Studio Code (VS Code): Chosen for our IDE due to its robust support for JavaScript and React.js.
 
 
 ## How to Run the Project:
 1. Clone the the github repository:
    git@github.com:Mama-Thomas/bug_tracker.git
 2. Setup Backend:
-- **Navigate to the backend directory:
+- Navigate to the backend directory:
     cd bug_tracker_backend
-- **Install dependencies: npm install
-- **Create a .env file with the following variables:
+- Install dependencies: npm install
+- Create a .env file with the following variables:
     PORT=3000 
     DATABASE_URL=your_postgresql_database_url JWT_SECRET=your_jwt_secret
-- **Run the backend server: node server.js
+- Run the backend server: node server.js
 3. Setup Frontend:
-- **Navigate to the frontend directory:
+- Navigate to the frontend directory:
     cd bug_tracker_frontend
-- **Install dependencies: npm install
+- Install dependencies: npm install
     Run the frontend server: npm start
 4. Access the Application:
-- **Open your browser and go to http://localhost:3001 for the frontend.
-- **Use Postman or any API client to interact with the backend API at
+- Open your browser and go to http://localhost:3001 for the frontend.
+- Use Postman or any API client to interact with the backend API at
 http://localhost:3000/api.
 
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img1.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img1.png)
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img2.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img2.png)
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img3.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img3.png)
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img4.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img4.png)
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img5.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img5.png)
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img6.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img6.png)
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img7.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img7.png)
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img8.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img8.png)
 
-(/Users/mamathomas/Desktop/UW/Spring24/CSS475/Bug_tracker_image_page/img9.png)
+(https://github.com/Mama-Thomas/Bug_Tracker_2/images/img9.png)
 
