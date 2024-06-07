@@ -7,6 +7,7 @@ const {
 
 const pool = require("../config/dbConfig");
 
+
 exports.getAuditLogsByProjectId = async (req, res) => {
   const { projectId } = req.params;
   try {
@@ -36,15 +37,7 @@ exports.getAllAuditLogs = async (req, res) => {
   }
 };
 
-// exports.getAuditLogsByUserProjects = async (req, res) => {
-//   const { userId } = req.params;
-//   try {
-//     const result = await getAuditLogsByUserProjects(userId);
-//     res.json(result.rows);
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
+
 exports.getAuditLogsByUserProjects = async (req, res) => {
   const { userId } = req.params;
   try {

@@ -1,3 +1,5 @@
+//Functions in this file are written by KERIMA HUSSEN
+
 const pool = require("../config/dbConfig");
 
 const getProjects = async () => {
@@ -12,8 +14,6 @@ const getProjects = async () => {
      LEFT JOIN users u ON p.projectmanagerid = u.userid`
   );
 };
-
-
 
 const getProjectById = async (id) => {
   return pool.query(
@@ -138,7 +138,6 @@ const getUserProjects = async (userId) => {
   );
 };
 
-
 const getProjectsByManager = async (managerId) => {
   return pool.query(
     `SELECT 
@@ -173,7 +172,6 @@ const removeProjectAuditLogs = async (projectId) => {
   `;
   await pool.query(query, [projectId]);
 };
-
 
 module.exports = {
   getProjects,

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {jwtDecode} from "jwt-decode"; // Correct import for named export
+import {jwtDecode} from "jwt-decode"; 
 
 const API_URL = "http://localhost:3000/api/users/";
 
@@ -25,7 +25,7 @@ const login = async (email, password) => {
       JSON.stringify({
         token: response.data.token,
         userid: decodedToken.userid,
-        roleid: decodedToken.roleid, // Store roleid decoded from token
+        roleid: decodedToken.roleid, 
       })
     );
   }

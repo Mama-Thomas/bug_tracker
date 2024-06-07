@@ -43,14 +43,6 @@ const deleteProject = (id) => {
   });
 };
 
-// const getUserProjects = (userId) => {
-//   return axios.get(`${API_URL}user/${userId}`, {
-//     headers: {
-//       Authorization: `Bearer ${authService.getToken()}`,
-//     },
-//   });
-// };
-
 const getUserProjects = (userId) => {
   return axios.get(`${API_URL}user/${userId}`, {
     headers: {

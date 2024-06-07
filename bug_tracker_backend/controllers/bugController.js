@@ -38,90 +38,7 @@ exports.getBugById = async (req, res) => {
   }
 };
 
-// exports.createBug = async (req, res) => {
-//   const {
-//     title,
-//     description,
-//     projectid,
-//     statusid,
-//     severityid,
-//     assignedto,
-//     reportedby,
-//   } = req.body;
-//   try {
-//     const result = await createBug({
-//       title,
-//       description,
-//       projectid,
-//       statusid,
-//       severityid,
-//       assignedto,
-//       reportedby,
-//     });
 
-//     // Create audit log
-//     await createAuditLog(
-//       result.rows[0].bugid,
-//       req.user.id,
-//       "CREATE",
-//       `Created bug: ${title}`
-//     );
-
-//     res.status(201).json(result.rows[0]);
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-// exports.updateBug = async (req, res) => {
-//   const { id } = req.params;
-//   const {
-//     title,
-//     description,
-//     projectid,
-//     statusid,
-//     severityid,
-//     assignedto,
-//     reportedby,
-//   } = req.body;
-//   try {
-//     const result = await updateBug(id, {
-//       title,
-//       description,
-//       projectid,
-//       statusid,
-//       severityid,
-//       assignedto,
-//       reportedby,
-//     });
-
-//     // Create audit log
-//     await createAuditLog(id, req.user.id, "UPDATE", `Updated bug: ${title}`);
-
-//     res.json(result.rows[0]);
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-// exports.deleteBug = async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     await deleteBug(id);
-
-//     // Create audit log
-//     await createAuditLog(
-//       id,
-//       req.user.id,
-//       "DELETE",
-//       `Deleted bug with ID: ${id}`
-//     );
-
-//     res.status(204).send();
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
 exports.createBug = async (req, res) => {
   const {
     title,
@@ -190,20 +107,6 @@ exports.updateBug = async (req, res) => {
   }
 };
 
-// exports.deleteBug = async (req, res) => {
-//   const { id } = req.params;
-//   const userId = req.user.userid; // Get the user ID from the authenticated request
-//   try {
-//     await deleteBug(id);
-
-//     // Create audit log entry
-//     await createAuditLog(id, userId, "DELETE", `Deleted bug with ID: ${id}`);
-
-//     res.status(204).send();
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
 
 exports.deleteBug = async (req, res) => {
   const { id } = req.params;
