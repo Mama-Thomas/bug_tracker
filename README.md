@@ -24,7 +24,7 @@ We are planning to make our bug tracking system better by using a simple and foc
 ## Schema Design:
 Link to Lucidcahrt https://lucid.app/lucidchart/3ea45360-d346-443d-9889-941329946833/edit?viewport_loc=-1 43%2C568%2C2466%2C1216%2C0_0&invitationId=inv_ec04d029-32f8-4e44-9b03-b14e5 e17ca9e
 
-![Schema](bug_tracker/images/schema_image.png)
+![Schema](/images/schema_image.png)
 
 ## API Endpoints and Functions
 
@@ -151,21 +151,21 @@ Link to Lucidcahrt https://lucid.app/lucidchart/3ea45360-d346-443d-9889-94132994
 http://localhost:3000/api.
 
 
-![image] (bug_tracker/images/img1.png)
+![image](/images/img1.png)
 
-![image] (bug_tracker/images/img2.png)
+![image](/images/img2.png)
 
-![image] (bug_tracker/images/img3.png)
+![image](/images/img3.png)
 
-![image] (bug_tracker/images/img4.png)
+![image](/images/img4.png)
 
-![image] (bug_tracker/images/img5.png)
+![image](/images/img5.png)
 
-![image] (bug_tracker/images/img6.png)
+![image](/images/img6.png)
 
-![image] (bug_tracker/images/img7.png)
+![image](/images/img7.png)
 
-![image] (bug_tracker/images/img8.png)
+![image](/images/img8.png)
 
-![image] (bug_tracker/images/img9.png)
+![image](/images/img9.png)
 
