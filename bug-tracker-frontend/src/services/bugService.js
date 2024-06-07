@@ -109,8 +109,24 @@ const getBugsByProjectId = (projectId) => {
 };
 
 
-const getUserBugs = (userId) => {
-  return axios.get(`${API_URL}user/${userId}`, {
+// const getUserBugs = (userId) => {
+//   return axios.get(`${API_URL}user/${userId}`, {
+//     headers: {
+//       Authorization: `Bearer ${authService.getToken()}`,
+//     },
+//   });
+// };
+
+const getBugsAssignedToUser = (userId) => {
+  return axios.get(`${API_URL}user/assigned/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
+const getBugsReportedByUser = (userId) => {
+  return axios.get(`${API_URL}user/reported/${userId}`, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -125,5 +141,6 @@ export default {
   updateBug,
   deleteBug,
   getBugsByProjectId,
-  getUserBugs
+  getBugsAssignedToUser,
+  getBugsReportedByUser
 };

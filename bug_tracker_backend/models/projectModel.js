@@ -138,6 +138,43 @@ const getUserProjects = async (userId) => {
   );
 };
 
+
+const getProjectsByManager = async (managerId) => {
+  return pool.query(
+    `SELECT 
+      p.projectid, 
+      p.name, 
+      p.startdate, 
+      p.enddate, 
+      u.firstname || ' ' || u.lastname as projectmanager 
+     FROM projects p
+     LEFT JOIN users u ON p.projectmanagerid = u.userid 
+     WHERE p.projectmanagerid = $1`,
+    [managerId]
+  );
+};
+
+const removeProjectUsers = async (projectId) => {
+  const query = "DELETE FROM users_projects WHERE projectid = $1";
+  await pool.query(query, [projectId]);
+};
+
+const removeProjectBugs = async (projectId) => {
+  const query = "DELETE FROM bugs WHERE projectid = $1";
+  await pool.query(query, [projectId]);
+};
+
+const removeProjectAuditLogs = async (projectId) => {
+  const query = `
+    DELETE FROM audit_logs
+    USING bugs
+    WHERE audit_logs.bugid = bugs.bugid
+    AND bugs.projectid = $1
+  `;
+  await pool.query(query, [projectId]);
+};
+
+
 module.exports = {
   getProjects,
   getProjectById,
@@ -145,5 +182,9 @@ module.exports = {
   updateProject,
   deleteProject,
   getUsersByProjectId,
-  getUserProjects
+  getUserProjects,
+  getProjectsByManager,
+  removeProjectUsers,
+  removeProjectBugs,
+  removeProjectAuditLogs,
 };

@@ -290,6 +290,11 @@ const getBugsAssignedToUser = async (userId) => {
   );
 };
 
+const removeBugAuditLogs = async (bugId) => {
+  const query = "DELETE FROM audit_logs WHERE bugid = $1";
+  await pool.query(query, [bugId]);
+};
+
 
 module.exports = {
   getBugs,
@@ -299,6 +304,7 @@ module.exports = {
   updateBug,
   deleteBug,
   getBugsReportedByUser,
-  getBugsAssignedToUser
+  getBugsAssignedToUser,
+  removeBugAuditLogs,
 };
 

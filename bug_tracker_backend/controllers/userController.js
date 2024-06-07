@@ -331,13 +331,13 @@ exports.loginUser = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user.userid, roleid: user.roleid },
+      { userid: user.userid, roleid: user.roleid },
       process.env.JWT_SECRET,
       {
         expiresIn: "1h",
       }
     );
-    console.log("Generated Token:", token); // Log generated token
+    console.log("Generated Token:", token ); // Log generated token
     res.json({ token });
   } catch (err) {
     res.status(500).json({ error: err.message });

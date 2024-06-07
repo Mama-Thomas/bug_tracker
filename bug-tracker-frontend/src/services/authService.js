@@ -24,6 +24,7 @@ const login = async (email, password) => {
       "user",
       JSON.stringify({
         token: response.data.token,
+        userid: decodedToken.userid,
         roleid: decodedToken.roleid, // Store roleid decoded from token
       })
     );
@@ -35,12 +36,29 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+// const getCurrentUser = () => {
+//   return JSON.parse(localStorage.getItem("user"));
+// };
+
+// const getToken = () => {
+//   const user = getCurrentUser();
+//   return user ? user.token : null;
+// };
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user) {
+    return {
+      token: user.token,
+      userid: user.userid,
+      roleid: user.roleid,
+      
+    };
+  }
+  return null;
 };
 
 const getToken = () => {
-  const user = getCurrentUser();
+  const user = JSON.parse(localStorage.getItem("user"));
   return user ? user.token : null;
 };
 

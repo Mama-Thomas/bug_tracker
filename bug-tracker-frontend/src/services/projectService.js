@@ -43,8 +43,24 @@ const deleteProject = (id) => {
   });
 };
 
+// const getUserProjects = (userId) => {
+//   return axios.get(`${API_URL}user/${userId}`, {
+//     headers: {
+//       Authorization: `Bearer ${authService.getToken()}`,
+//     },
+//   });
+// };
+
 const getUserProjects = (userId) => {
   return axios.get(`${API_URL}user/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
+const getProjectsByManager = (managerId) => {
+  return axios.get(`${API_URL}/manager/${managerId}`, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -58,5 +74,6 @@ export default {
   createProject,
   updateProject,
   deleteProject,
-   getUserProjects
+  getUserProjects,
+  getProjectsByManager,
 };

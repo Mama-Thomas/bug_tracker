@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const bugRoutes = require("./routes/bugRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const rolesRouter = require("./routes/roleRoutes");
+const auditLogRoutes = require("./routes/auditLogRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/bugs", bugRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api", rolesRouter);
+app.use("/api/auditlogs", auditLogRoutes);
 
 
 app.listen(PORT, () => {
